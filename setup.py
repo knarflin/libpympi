@@ -4,8 +4,8 @@ import pdb
 from distutils.core import setup, Extension
 
 import os
-os.environ["CC"] = "mpicc"
-os.environ["LDFLAGS"] = " -L/usr/lib/x86_64-linux-gnu -lmpich"  # "-Wl,-Bsymbolic-functions -Wl,-z,relro" + \
+os.environ["CC"] = "/opt/openmpi/bin/mpicc"
+os.environ["LDFLAGS"] = " -L/opt/openmpi/lib -lmpi -Wl,-rpath,/opt/openmpi/lib"  # -Wl, -Bsymbolic-functions - Wl, -z, relro" + \
 
 setup(
     name="libpympi",
