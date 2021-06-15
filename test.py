@@ -26,6 +26,3 @@ if __name__ == "__main__":
     libpympi.mpi_init()
     main()
     libpympi.mpi_finalize()
-
-    import os
-    print(os.environ['ENVAR'])

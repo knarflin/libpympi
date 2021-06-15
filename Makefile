@@ -5,4 +5,4 @@ clean:
 	rm -rf *.out *.bin *.exe *.o *.a *.so test build
 
 run:
-	bash run_with_env.sh
+	/opt/openmpi/bin/mpirun -n 3 python3 test.py
