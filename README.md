@@ -13,6 +13,13 @@ apt install mpich
 make
 ```
 
+### Install
+
+Default install in current system-env / user-env / virtual-env / conda-env.
+```
+make install
+```
+
 ### Example
 ```
 make run
