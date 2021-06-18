@@ -92,8 +92,10 @@ PyMethodDef mpiex_funcs[] = {
     {"mpi_finalize", (PyCFunction)mpi_finalize, METH_NOARGS,
      "Call C MPI_FINALIZE"},
     {"mpipassa", (PyCFunction)mpipassa, METH_VARARGS, "Passing args"},
-    {"mpi_allreduce", (PyCFunction)mpi_allreduce, METH_VARARGS,
-     "Call C MPI_ALLREDUCE"},
+    {"mpi_all_reduce_sum", (PyCFunction)mpi_all_reduce_sum, METH_VARARGS,
+     "Call C MPI_ALL_REDUCE_SUM"},
+    {"mpi_all_reduce_bxor", (PyCFunction)mpi_all_reduce_bxor, METH_VARARGS,
+     "Call C MPI_ALL_REDUCE_BXOR"},
     {NULL}};
 
 static PyTypeObject CustomType = {

@@ -59,7 +59,7 @@ PyObject *mpipassa(PyObject *self, PyObject *args) {
   return py_obj;
 }
 
-PyObject *mpi_allreduce(PyObject *self, PyObject *args) {
+PyObject *mpi_all_reduce_sum(PyObject *self, PyObject *args) {
   Py_buffer py_buf;
 
   PyArg_ParseTuple(args, "y*", &py_buf);
@@ -71,6 +71,29 @@ PyObject *mpi_allreduce(PyObject *self, PyObject *args) {
 
   int status = MPI_Allreduce(sendbuf, recvbuf, (int)count, MPI_UINT64_T,
                              MPI_SUM, MPI_COMM_WORLD);
+
+  if (status != 0) {
+    printf("MPI_Allreduce retval: %d\n", status);
+  }
+
+  PyObject *py_obj = Py_BuildValue("y#", recvbuf, (int)buf_size);
+  free(recvbuf);
+
+  return py_obj;
+}
+
+PyObject *mpi_all_reduce_bxor(PyObject *self, PyObject *args) {
+  Py_buffer py_buf;
+
+  PyArg_ParseTuple(args, "y*", &py_buf);
+  size_t buf_size = py_buf.len;
+  size_t count    = buf_size / sizeof(int64_t);
+
+  const int64_t *sendbuf = py_buf.buf;
+  int64_t *recvbuf       = (int64_t *)malloc(buf_size);
+
+  int status = MPI_Allreduce(sendbuf, recvbuf, (int)count, MPI_UINT64_T,
+                             MPI_BXOR, MPI_COMM_WORLD);
 
   if (status != 0) {
     printf("MPI_Allreduce retval: %d\n", status);
