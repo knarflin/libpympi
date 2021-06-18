@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+'''
+Test functions below are correct:
+- all_reduce SUM
+- all_reduce BXOR
+[TODO]
+- rank, world_size
+- with python unittest module
+'''
+import atexit
 import libpympi
 import torch
 import numpy as np
