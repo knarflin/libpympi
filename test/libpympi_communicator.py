@@ -42,7 +42,8 @@ def _tensor_all_reduce_sum(tensor):
     ret = np.frombuffer(ret_bytes, dtype=np.int64)
     ret = ret.reshape(npshape)
 
-    return torch.tensor(np.copy(ret))
+    # return torch.tensor(np.copy(ret))
+    return torch.tensor(ret)
 
 
 def _tensor_all_reduce_bxor(tensor):
@@ -56,7 +57,8 @@ def _tensor_all_reduce_bxor(tensor):
     ret = np.frombuffer(ret_bytes, dtype=np.int64)
     ret = ret.reshape(npshape)
 
-    return torch.tensor(np.copy(ret))
+    # return torch.tensor(np.copy(ret))
+    return torch.tensor(ret)
 
 
 def mpi_all_reduce_sum(input, batched=False):
