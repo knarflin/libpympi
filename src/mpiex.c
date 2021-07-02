@@ -1,4 +1,5 @@
 #include "mpiex.h"
+
 #include <mpi.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -66,10 +67,9 @@ PyObject *mpi_all_reduce_sum(PyObject *self, PyObject *args) {
   size_t buf_size = py_buf.len;
   size_t count    = buf_size / sizeof(int64_t);
 
-  const int64_t *sendbuf = py_buf.buf;
-  int64_t *recvbuf       = (int64_t *)malloc(buf_size);
+  int64_t *recvbuf = py_buf.buf;
 
-  int status = MPI_Allreduce(sendbuf, recvbuf, (int)count, MPI_UINT64_T,
+  int status = MPI_Allreduce(MPI_IN_PLACE, recvbuf, (int)count, MPI_UINT64_T,
                              MPI_SUM, MPI_COMM_WORLD);
 
   if (status != 0) {
@@ -77,7 +77,6 @@ PyObject *mpi_all_reduce_sum(PyObject *self, PyObject *args) {
   }
 
   PyObject *py_obj = Py_BuildValue("y#", recvbuf, (int)buf_size);
-  free(recvbuf);
 
   return py_obj;
 }
@@ -89,10 +88,9 @@ PyObject *mpi_all_reduce_bxor(PyObject *self, PyObject *args) {
   size_t buf_size = py_buf.len;
   size_t count    = buf_size / sizeof(int64_t);
 
-  const int64_t *sendbuf = py_buf.buf;
-  int64_t *recvbuf       = (int64_t *)malloc(buf_size);
+  int64_t *recvbuf = py_buf.buf;
 
-  int status = MPI_Allreduce(sendbuf, recvbuf, (int)count, MPI_UINT64_T,
+  int status = MPI_Allreduce(MPI_IN_PLACE, recvbuf, (int)count, MPI_UINT64_T,
                              MPI_BXOR, MPI_COMM_WORLD);
 
   if (status != 0) {
@@ -100,7 +98,6 @@ PyObject *mpi_all_reduce_bxor(PyObject *self, PyObject *args) {
   }
 
   PyObject *py_obj = Py_BuildValue("y#", recvbuf, (int)buf_size);
-  free(recvbuf);
 
   return py_obj;
 }
