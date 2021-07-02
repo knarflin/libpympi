@@ -4,8 +4,8 @@
 #include <string.h>
 #include <time.h>
 
-#define COUNT 1000
-// #define COUNT 2408448  // 2408448 // 2 * 2 * 2 * 6 * 224 * 224
+// #define COUNT 1000
+#define COUNT 2408448  // 2408448 // 2 * 2 * 2 * 6 * 224 * 224
 
 void test_mpi_allreduce() {
   struct timespec tstart = {0, 0}, tend = {0, 0};
