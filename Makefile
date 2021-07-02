@@ -15,3 +15,11 @@ test_libpympi_communicator:
 
 test_check_crypten_works:
 	/opt/openmpi/bin/mpirun -n 3 python3 test/test_check_crypten_works.py
+
+# For C only
+c:
+	/opt/openmpi/bin/mpicc -g all_reduce.c
+c-run:
+	/opt/openmpi/bin/mpirun -n 3 ./a.out
+c-clean:
+	rm ./a.out
