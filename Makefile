@@ -18,7 +18,7 @@ test_check_crypten_works:
 
 # For C only
 c:
-	/opt/openmpi/bin/mpicc -g all_reduce.c
+	/opt/openmpi/bin/mpicc -O3 purec_all_reduce.c
 c-run:
 	/opt/openmpi/bin/mpirun -n 3 ./a.out
 c-clean:
